@@ -1,0 +1,71 @@
+{% extends 'auth_app/base.html' %}
+{% load static %}
+
+
+{% block main %}
+<link rel="stylesheet" type="text/css" href="{% static 'image_preview.css' %}"> 
+<section class="vh-100 mt-2" style="background-color: #eee;">
+    <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100 shadow-lg">
+        <h1 class="mt-5">Upload an Image</h1>
+        <form method="post" enctype="multipart/form-data" action="{% url 'upload-image' %}">
+        
+        <div class="form-group d-flex flex-column">
+            <div class="image-preview-container">
+                <div class="preview" style="width: 100%; height: 400px; overflow: scroll;">
+                    <img id="preview-selected-image" class="m-2"/>
+                </div>
+                <label for="file-upload">Upload Image</label>
+                <input type="file" id="file-upload" accept="image/*" id="image-input" name="image" onchange="previewImage(event);" />
+            </div>  
+        </div>
+        <div class="form-group d-flex flex-column" >
+            <label for="image_title">Image title:</label>
+            <input type="text" name="image_name" id="image_name" class="form-control">
+        </div>
+        <div class="form-group d-flex flex-column">
+            <label for="image_description">Image Description:</label>
+            <textarea name="image_description" id="image_description" class="form-control"></textarea>
+        </div>
+        <div class="form-group d-flex flex-column m-3">
+            <button type="submit" class="btn btn-primary file-upload">Upload</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</section>
+<script>
+const previewImage = (event) => {
+    /**
+     * Get the selected files.
+     */
+    const imageFiles = event.target.files;
+    /**
+     * Count the number of files selected.
+     */
+    const imageFilesLength = imageFiles.length;
+    /**
+     * If at least one image is selected, then proceed to display the preview.
+     */
+    if (imageFilesLength > 0) {
+        /**
+         * Get the image path.
+         */
+        const imageSrc = URL.createObjectURL(imageFiles[0]);
+        /**
+         * Select the image preview element.
+         */
+        const imagePreviewElement = document.querySelector("#preview-selected-image");
+        /**
+         * Assign the path to the image preview element.
+         */
+        imagePreviewElement.src = imageSrc;
+        /**
+         * Show the element by changing the display value to "block".
+         */
+        imagePreviewElement.style.display = "block";
+    }
+};
+  </script>
+
+{% endblock main %}
