@@ -75,8 +75,8 @@ from datetime import timedelta
 
 # Set your JWT_SECRET_KEY
 SECRET_KEY = 'your-secret-key'
-aws_access_key_id="AKIA55RUG4ZW3CVW3YEO"
-aws_secret_access_key="vp7jepAoGVT6xWvkIOP2FW8Hm2LN+cGMQ2LtpAZj"
+aws_access_key_id=""
+aws_secret_access_key=""
 bucket_name="csvbucketloop"
 # Configure Simple JWT
 SIMPLE_JWT = {
